@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Phantom</title>
+  
+  <!-- PWA & iOS Native Home Screen App Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Phantom" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFJElEQVR4nO3dO04cQRSF4cJygISQCFiDF8CmHJE48CIInBB5UyzAayBFIsOB3VZ51PPo6luPc+r/IssWMz1Vvy41D8PV7e3dRwJMfOp9AUAkgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoaVz70vINLN9X3vS5D19v7a+xJCyAZNvLHW1lMxcqmgibitfL1V4pYImpD7W/Zg9LCHDZqIxzT61B4uaELWMeLUHuplO2LWNNK+DTGhR1oQlBllWnef0MTspfd+dg2694NHHT33tcuRg5D99TqCNJ/QxDyX1vvdNGhinlPLfW8WNDHPrdX+NwmamJFSmw6qB03MyNXuofvr0ECkqkEznbGmZhfVgiZmnFKrjypBEzMuUaMTztCwEh400xlbRPcSGjQxo0RkNxw5YCXs03ZM5z+en142f83j94cKV6Ll5vo+5JN5V1G/1m3GoEvivdSMkRN0YzUDPmeGwIcJ2j3mniEfcg97b9QEfcRIER/jGHf3oN1iVgj5kFvYe6Im6L8UQz7kEvaeoHkdOnnEnJLP49hj14RWn87OAahP69IpPe2Edo45Jf/Hd8yUQc+y2bM8ztxUR44ZN3ihdgThyHHGzDGnNM/jLw5aaTrPspnnKK1DaV/2E1ppE1twXw/roN03r5TzutgG7bxpEVzXxzJo182K5rhOlkFjXnZBO06dmtzWyypot81pxWndbIJ22pQeXNbPJmggJZOgXaZLbw7rKB+0wyaMRH095YMGctJBq0+TUSmvq3TQwCHZoJWniALV9ZUNGlhD0LAiGbTqt0M1iussGTRwjFzQilNDmdp6ywUNnELQsELQsCIVtNp5zoXSuksFDZxD0LAS9nsKZ/P125d/f/7549dwtzcrgt4oD+/w70pCjL692ckcOZSemDhSWX+ZoEewNk23/Hvt2wNBwwxBwwpBwwpBwwpBwwpBwwpBb3DujY6tb4RE3x4IGmZ463ujZWpGffYi+vZmR9CFoqMj4hgcOWCFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGFFJujH7w+9L2FqKusvEzRwCYKGFYKGFYKGFamgVZ6YuFFad6mggXMIGlbkglb69udAbb2Lg357f428DuA/pX3JTeiU9KaGKsV1vrq9vfso/eKb6/vIa9ns+eml+n3km9ri/ka5jt4xl05ofpPsBrNFpUjyyLGoveGnbn/W+x7driNHSv2PHYvIibl1Q2e971r2vOAgPaFzUZtRcjuz3veIbCZ0rmRqRW3orPcdac+E3h10SmNGvTi1ybU3c9b73mPv+xv2QUPL3qBDztC8a4gIER3ZPCkEUiJomAkLmmMH9ojqhwkNK6FBM6VRIrKb8AlN1NgiuheOHLBSJWimNC5Ro5NqE5qocUqtPqoeOYgaa2p2wRkaVqoHzZRGrnYPTSY0USOlNh00O3IQ9dxa7X/TMzRRz6nlvjd/UkjUc2m9311+LsfyIPmfLr56Da6uL9sxrT313Nfur0MTtZfe+znEjwLjCKKvd8iL7hM6N8qiYJuR9m2ICZ1jWusYKeTFcEEv8sUi7nGMGHFu2KBzTO3+Rg95IRH0gqndlkrEOamgc2uLTeTlFONdIxv0GpdNQbmhXrYD9iJoWCFoWCFoWCFoWCFoWCFoWCFoWCFoWCFoWCFoWCFoWPkNB7Stq6snHgwAAAAASUVORK5CYII=" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFJElEQVR4nO3dO04cQRSF4cJygISQCFiDF8CmHJE48CIInBB5UyzAayBFIsOB3VZ51PPo6luPc+r/IssWMz1Vvy41D8PV7e3dRwJMfOp9AUAkgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoYVgoaVz70vINLN9X3vS5D19v7a+xJCyAZNvLHW1lMxcqmgibitfL1V4pYImpD7W/Zg9LCHDZqIxzT61B4uaELWMeLUHuplO2LWNNK+DTGhR1oQlBllWnef0MTspfd+dg2694NHHT33tcuRg5D99TqCNJ/QxDyX1vvdNGhinlPLfW8WNDHPrdX+NwmamJFSmw6qB03MyNXuofvr0ECkqkEznbGmZhfVgiZmnFKrjypBEzMuUaMTztCwEh400xlbRPcSGjQxo0RkNxw5YCXs03ZM5z+en142f83j94cKV6Ll5vo+5JN5V1G/1m3GoEvivdSMkRN0YzUDPmeGwIcJ2j3mniEfcg97b9QEfcRIER/jGHf3oN1iVgj5kFvYe6Im6L8UQz7kEvaeoHkdOnnEnJLP49hj14RWn87OAahP69IpPe2Edo45Jf/Hd8yUQc+y2bM8ztxUR44ZN3ihdgThyHHGzDGnNM/jLw5aaTrPspnnKK1DaV/2E1ppE1twXw/roN03r5TzutgG7bxpEVzXxzJo182K5rhOlkFjXnZBO06dmtzWyypot81pxWndbIJ22pQeXNbPJmggJZOgXaZLbw7rKB+0wyaMRH095YMGctJBq0+TUSmvq3TQwCHZoJWniALV9ZUNGlhD0LAiGbTqt0M1iussGTRwjFzQilNDmdp6ywUNnELQsELQsCIVtNp5zoXSuksFDZxD0LAS9nsKZ/P125d/f/7549dwtzcrgt4oD+/w70pCjL692ckcOZSemDhSWX+ZoEewNk23/Hvt2wNBwwxBwwpBwwpBwwpBwwpBwwpBb3DujY6tb4RE3x4IGmZ463ujZWpGffYi+vZmR9CFoqMj4hgcOWCFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGGFoGFFJujH7w+9L2FqKusvEzRwCYKGFYKGFYKGFamgVZ6YuFFad6mggXMIGlbkglb69udAbb2Lg357f428DuA/pX3JTeiU9KaGKsV1vrq9vfso/eKb6/vIa9ns+eml+n3km9ri/ka5jt4xl05ofpPsBrNFpUjyyLGoveGnbn/W+x7driNHSv2PHYvIibl1Q2e971r2vOAgPaFzUZtRcjuz3veIbCZ0rmRqRW3orPcdac+E3h10SmNGvTi1ybU3c9b73mPv+xv2QUPL3qBDztC8a4gIER3ZPCkEUiJomAkLmmMH9ojqhwkNK6FBM6VRIrKb8AlN1NgiuheOHLBSJWimNC5Ro5NqE5qocUqtPqoeOYgaa2p2wRkaVqoHzZRGrnYPTSY0USOlNh00O3IQ9dxa7X/TMzRRz6nlvjd/UkjUc2m9311+LsfyIPmfLr56Da6uL9sxrT313Nfur0MTtZfe+znEjwLjCKKvd8iL7hM6N8qiYJuR9m2ICZ1jWusYKeTFcEEv8sUi7nGMGHFu2KBzTO3+Rg95IRH0gqndlkrEOamgc2uLTeTlFONdIxv0GpdNQbmhXrYD9iJoWCFoWCFoWCFoWCFoWCFoWCFoWCFoWCFoWCFoWCFoWPkNB7Stq6snHgwAAAAASUVORK5CYII=" />
+  <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlBoYW50b20iLCAic2hvcnRfbmFtZSI6ICJQaGFudG9tIiwgInN0YXJ0X3VybCI6ICIuIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLCAidGhlbWVfY29sb3IiOiAiIzAwMDAwMCIsICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFRdUVsRVFWUjRuTzNkTVhJYnh4YUcwWkZLZ2FwVXJGS2dOWGdCM3BRakp3NjhDQWRPSEhsVFhvRFhvRlJWeXZRQ1Bab1VTUkRBb0tlN2IvL25wTStXZ1dIUHZSOEdrdDZidTd1UDN6WUFJTXJiMFM4QUFPaFBBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJSGVqWDRCck92RCswK2pYd0lzNGN2WHo2TmZBZ3NTQU94bXdVTWY1KzQxZ2NBZUFvQ0xXUFl3cjVmdVQxSEFPUUtBWnl4N3FFOFVjSTRBWU5zMlN4OFNQTDdQeFFBQ0lKU0ZEOW1lemdCQmtFY0FCTEgwZ1ZNOEhjZ2pBQlpuNlFQWEVnTVpCTUNpTEg2Z2hmdFpJZ1RXSXdBV1l1a0RSL0ZVWUQwQ1lBRVdQOUNUcHdKckVBQ0ZXZnpBU0VLZ05nRlFrTVVQekVRSTFDUUFDckg0Z1prSmdWb0VRQUVXUDFDSkVLaEJBRXpNNGdjcUV3SnpFd0FUc3ZpQmxRaUJPYjBkL1FMNGtlVVByTXA4bTRzbkFKTndZd0FKUEEyWWh3QVl6T0lIRWdtQjhYd0ZNSkRsRDZRekI4ZnhCR0FBQng3Z2dhY0JZM2dDMEpubEQvQXk4N0V2QWRDUnd3M3dPbk95SDE4QmRPQkFBMXpPVndKOWVBSndNTXNmWUIvejgxZ0M0RUFPTDhCdHpOSGorQXJnQUE0c1FEdStFamlHSndDTldmNEF4ekJmMnhJQURUbWNBTWN5WjlzUkFJMDRsQUI5bUxkdENJQUdIRWFBdnN6ZDJ3bUFHem1FQUdPWXY3Y1JBRGR3K0FER01vZjM4OGNBZDNEZ0FPYmhqd251NHduQWxTeC9nRG1aejljUkFGZHd1QURtWms1ZlRnQmN5S0VDcU1HOHZvd0FBSUJBQXVBQ2FoS2dGblA3UEFGd2hrTUVVSlA1L1RvQjhBcUhCNkEyYy93MEFYQ0NRd093QnZQOFpRTGdCUTRMd0ZyTTllY0V3Qk1PQ2NDYXpQY2ZDWUJISEE2QXRabnpEd1FBQUFRU0FQK25DZ0V5bVBmZkNZRE5ZUUJJWSs0TEFJY0FJRlQ2L0k4UEFBQklGQjBBNmZVSGtDNTVEOFFHUVBJUEhZQUhxZnNnTWdCU2Y5Z0F2Q3h4TDBRR0FBQ2tpd3VBeE1vRDRMeTAvUkFWQUdrL1hBQ3VrN1Fub2dJQUFQZ3VKZ0NTcWc2QS9WTDJSVXdBQUFBUElnSWdwZVlBYUNOaGJ5d2ZBQWsvUkFEYVczMS9MQjhBQU1CelN3ZkE2dlVHd0xGVzNpTkxCd0FBOExKbEEyRGxhZ09nbjFYM3liSUJBQUNjdG1RQXJGcHJBSXl4NGw1NU4vb0ZBRzM5OWNjL2gvM2F2LzcrODJHL050RFhtN3U3ajk5R3Y0aVdWcXcwdUhma2NtOUZKTEN5TDE4L2ozNEp6UWdBbUZDRlJYOHRZY0FLQk1Da0xIK3FXbkhobnlNSXFHcVZDQkFBTUVEaXdqOUhFRkNGQUppTTVjL01MUHpyQ1FKbXRrSUVDQUE0aUtYZmpoaGdOZ0pnRXBZL3M3RDBqeWNHbUVYMUNCQUFjQ05MZnh3eHdFZ0NZQUlDZ040cy9mbUlBWG9UQUlOWi92Ums4YzlQQ05CVDVRZ1FBSENHcFYrWEdPQm9BbUFReTU4aldmenJFQUljcVdvRUNBQjR3dUpmbHhEZ0NBSmdBQUZBU3haL0RpRkFTd0tnTTh1ZlZpeitYRUtBVmlwR2dBQWdsc1hQUFNIQXJRUkFSd0tBdlN4K1RoRUM3Q1VBT3JIODJjUGk1MUpDZ0QycVJjRGIwUzhBZXJEOHVZYnpRZ0pQQUZpYVFjNnRQQTNnVXA0QXdDUXNmMXB3amxoVnVTY0FQdjF6am9ITlVUd040SnhLVHdFRUFNdXcrT2xGQ0hCS3BRRHdGUUJMc1B6cHlYbGpCYVVDd0tkL1htSVlNNEp6eDBzcTdhbFNYd0ZVdXJBY3p3Qm1GcjRTNExFcVh3T1VlZ0lBOXl4L1p1SThVcEVBb0J6RGxoazVsMVRqS3dES01HQ3B3bGNDMlh3RjBKamxuODN5cHhMbk5WdVZmVlVtQU1obG1GS1JjOHZzQkFCVE0wU3B6UGxsWm1WK0QwQ1ZSeXEwWVhDeUdyOHZJRXVGM3dmZ0NRRFRzZnhaa1hQTmJFb0VnRS8vT1F4SlZ1Wjg1Nml3dDBvRUFCa01SeEk0NTh4Q0FEQUZRNUVrempzekVBQU1aeGlTeUxsbk5BSEFVSVlneVp4L1JoSUFER1A0Z2Z1QWNRUUFReGg2OE1EOXdBZ0NnTzRNTzNqT2ZVRnYwd2RBaFQ5THllVU1PVGpOL2JHVzJmZlg5QUhBT2d3M09NOTlRaThDZ0M0TU5iaWMrNFVlQkFDSE04emdldTRiamlZQU9KUWhCdnU1ZnppU0FPQXdoaGZjem4zRVVRUUFBQVFTQUJ6Q3B4Wm94LzNFRVFRQXpSbFcwSjc3aXRZRUFFMFpVbkFjOXhjdENRQ2FNWnpnZU80eldoRUFBQkJJQU5DRVR5WFFqL3VORmdRQU56T01vRC8zSGJjU0FOekVFSUp4M0gvY1FnQUFRQ0FCd0c0K2ZjQjQ3a1AyRWdEc1l1akFQTnlQN0NFQXVKcGhBL054WDNJdEFRQUFnUVFBVi9FcEErYmwvdVFhQWdBQUFna0FMdWJUQmN6UGZjcWxCQUFYTVZTZ0R2Y3JseEFBQUJCSUFIQ1dUeE5Rai91V2N3UUFyekpFb0M3M0w2OFJBQUFRU0FCd2trOFBVSi83bUZNRUFBQUVFZ0M4eUtjR1dJZjdtWmNJQUFBSUpBQjR4cWNGV0kvN21xY0VBQUFFRWdEOHdLY0VXSmY3bThjRUFBQUVFZ0Q4eDZjRFdKLzduSHNDQUFBQ0NRQzJiZk9wQUpLNDM5azJBUUFBa1FRQVBnMUFJUGM5QWdBQUFna0FBQWdrQU1KNURBaTUzUC9aQkFBQUJCSUF3ZFEvWUE3a0VnQUFFRWdBQUVBZ0FSREtZei9nbm5tUVNRQUFRQ0FCQUFDQkJFQWdqL3VBcDh5RlBBSUFBQUlKQUFBSUpBRENlTXdIbkdJK1pCRUFBQkJJQUFCQUlBRVF4T005NEJ4eklvY0FBSUJBQWdBQUFna0FBQWdrQUVMNFhnKzRsSG1SUVFBQVFDQUJBQUNCQkFBQUJCSUFBWHlmQjF6TDNGaWZBQUNBUUFJQUFBSUpBQUFJSkFBVzUzczhZQy96WTIwQ0FBQUN2UnY5QWlESkw3LzlkUEovKy92UGZ6dStrbjRTM3pOVUlBQ2dnOWVXNE5OL1pwV2xtUGllb1JKZkFjREJMbG1FdC96ek0wcDh6MUNOSndCd2tGdVdXdFZQeG9udkdhcnlCR0JoZmdjdmNDdHpaRjBDQUE3UTZwRjJwVWZqaWU4WktoTUEwRmpyQlZaaElTYStaNmhPQUFCQUlBRUFEUjMxeVhYbVQ4U0o3eGxXSUFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUJibEwrOEFXakZQMWlRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQWdJYisvdlBmVXI5dUM0bnZHVllnQUFBZ2tBQ0F4bHAvY3Ezd1NUanhQVU4xQWdBTzBHcUJWVnFFaWU4WktoTUFBQkRvM2VnWEFLdTYveVQ3eTI4LzdmNTNxMGw4ejFDVkp3QndzR3NYMndxTE1QRTlReldlQUVBSGwzd3lYbTBKSnI1bnFFUUFRRWVKQ3kveFBVTUZ2Z0lBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJOU9idTd1TzMwUy9pTlIvZWZ4cjlFa3I3NjQ5L1JyOEVvTEJmZi85NTlFc283Y3ZYejZOZndrbWVBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFDek8vNUVIc0pmNXNUWUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRVF3Ry9rQWE1bGJxeFBBQUJBSUFFQUFJR21ENEF2WHorUGZnbEw4RGdQdUpSNTBjYnMrMnY2QUFBQTJoTUFBQkJJQUFUeFdBODR4NXpJSVFBQUlKQUFDS1B1Z1ZQTWh5d0NBQUFDQ1lCQUtoOTR5bHpJVXlJQVp2K3psQUR3V0lXOVZTSUFhRS90QS9mTWcwd0NBQUFDQ1lCZ3FoOHdCM0lKZ0hCdWZzamwvcy8yNXU3dTQ3ZlJMK0pTSDk1L0d2MFNsdlhYSC8rTWZnblRlendzWGEvNStQbGN4L0kvVG9YZkFMaHQyL1p1OUF1QWlpeWJPVmhpc0o4bkFQekhJanZ0MGtYakdoN1B6K0oyd3VsWVZaNEFDQUIrWUdnK3QzZFl1cGJ0K0JtMFkva2ZUd0FjUUFEMFlXZythRFVzWGRQcnVmYnRXZjU5Q0lDRGlJQStETTFqaDZYcis1enJmU3pMdjQ4cXkzL2JCQUN2U0I2YVBZZWw2OXlINjB3UGxRTEEzd1BBU2FsRG8vZjdkcDNYL08vTkl2VjljMTY1QUtoVVZ5dElHeDZqM3EvcnZQWi9kNVMwOXp0YXRmMVU3aXVBYmZNMXdDZ3JQMEtkYVZDNnpuMjR6clJXTFFES1BRRmduRldIeW16dmE3YlgwOHBzNzJ1MjE5UEtxdStMOWdRQVYxbHR1TXo2Zm1aOVhYdk4rbjVtZlYxN3JmWitPRmJKcndDMnpkY0FNNmo4Q0xYU29IU2QrM0NkdVVXMXgvL2JKZ0Jvb05MZ3JEd29YZWMrWEdmMkVBQWRDWUQ1ekR3NFZ4cVVybk1mcmpQWEVBQ2RpWUE1elRRNFZ4NlVybk1mcmpQblZGeisyeVlBT05pSTRaazRKRjNuUGx4blhpSUFCaEFBdFJ3NVBBM0pCNjV6SDY0ejl3VEFJQ0tndGoxRDFIQzhudXZjaCt1Y3ArcnkzellCQUFDN1ZRNkE4bjhSVU9XTEQwQmQxZmRQK1FBQUFLNG5BQUFnMEJJQlVQMHhEQUMxckxCM2xnZ0FBT0E2eXdUQUNqVUd3UHhXMlRmTEJBQUFjTG1sQW1DVktnTmdUaXZ0bWFVQ0FBQzR6SElCc0ZLZEFUQ1AxZmJMY2dFQUFKeTNaQUNzVm1rQWpMWGlYbGt5QUFDQTF5MGJBQ3ZXR2dEOXJicFBsZzBBQU9DMHBRTmcxV29Eb0krVjk4alNBUUFBdkd6NUFGaTUzZ0E0enVyN1kva0EyTGIxZjRnQXRKV3dOeUlDQUFENFVVd0FKTlFjQUxkTDJSY3hBUUFBUElnS2dKU3FBMkNmcEQwUkZRRGJsdlhEQmVCeWFmc2hMZ0FBZ05BQVNLczhBRjZYdUJjaUEyRGJNbi9ZQUR5WHVnOWlBMkRiY24vb0FIeVh2QWVpQXdBQVVzVUhRSEw5QVNSTG4vL3hBYkJ0RGdGQUduTmZBUHpIWVFESVlONS9Kd0FBSUpBQWVFUVZBcXpObkg4Z0FKNXdPQURXWkw3L1NBQzh3Q0VCV0l1NS9wd0FPTUZoQVZpRGVmNHlBZkFLaHdhZ05uUDhOQUZ3aHNNRFVKUDUvVG9CY0FHSENLQVdjL3M4QVFBQWdRVEFoZFFrUUEzbTlXVUV3QlVjS29DNW1kT1hFd0JYY3JnQTVtUStYK2ZkNkJkUTBmMGgrL0QrMCtCWEFvREZ2NDhuQURkdzZBREdNb2YzRXdBM2N2Z0F4akIvYnlNQUduQUlBZm95ZDI4bkFCcHhHQUg2TUcvYkVBQU5PWlFBeHpKbjJ4RUFqVG1jQU1jd1g5dnl4d0FQNEk4SkFyUmo4Ui9ERTRBRE9iUUF0ekZIanlNQUR1YndBdXhqZmg3TFZ3QWQrRW9BNEhJV2Z4K2VBSFRrVUFPOHpwenNSd0IwNW5BRHZNeDg3TXRYQUFQNFNnRGdnY1UvaGljQUF6bjBRRHB6Y0J4UEFBYnpOQUJJWlBHUEp3QW1JUVNBQkJiL1BId0ZNQmszQjdBcTgyMHVuZ0JNeU5NQVlDVVcvNXdFd01TRUFGQ1p4VDgzQVZDQUVBQXFzZmhyRUFDRkNBRmdaaFovTFFLZ0lDRUF6TVRpcjBrQUZDWUVnSkVzL3RvRXdBS0VBTkNUeGI4R0FiQ1F4emVsR0FCYXN2VFhJd0FXNWFrQTBJTEZ2eTRCc0RoUEJZQnJXZm9aQkVBUU1RQ2NZdW5uRVFDaG50N3NnZ0N5V1BnSUFMWnQ4M1FBRWxqNlBDWUFlT2FsSVNFS29CYkxubk1FQUJjUkJUQXZ5NTQ5QkFDN25SczZBZ0hhc09BNWdnRGdNSVlXd0x6ZWpuNEJBRUIvQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUF2MFBhK0MwNGZYTnRuRUFBQUFBU1VWT1JLNUNZSUk9IiwgInNpemVzIjogIjUxMng1MTIiLCAidHlwZSI6ICJpbWFnZS9wbmciLCAicHVycG9zZSI6ICJhbnkgbWFza2FibGUifV19" />
+
+  <style>
+    :root {
+      --bg-black: #000000;
+      --bg-card: #141416;
+      --bg-card-elevated: #1c1c1f;
+      --bg-pill: #1f1f23;
+      --border-subtle: #26262b;
+      --accent-lavender: #ab9ff2;
+      --accent-lavender-hover: #9b8ce8;
+      --text-primary: #ffffff;
+      --text-secondary: #8e8e93;
+      --text-muted: #636366;
+      --green: #16c784;
+      --red: #ea3943;
+      --blue-link: #6c8eef;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
+    .app-shell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      background: #000000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    @media (min-width: 500px) {
+      body {
+        background: #0b0b0e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .app-shell {
+        height: min(880px, 95vh);
+        border-radius: 44px;
+        border: 1px solid #26262c;
+        box-shadow: 0 30px 90px rgba(0,0,0,0.85);
+      }
+    }
+
+    /* Simulated iOS Status Bar */
+    .ios-status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(10px + var(--safe-top)) 24px 8px 26px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      background: #000000;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+    .ios-status-bar.hidden {
+      display: none;
+    }
+    .status-time {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .battery-pill {
+      background: #ffffff;
+      color: #000000;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 5px;
+      line-height: 1.2;
+      position: relative;
+    }
+    .battery-pill::after {
+      content: "";
+      position: absolute;
+      right: -3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 5px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* Top Nav Row */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 12px 16px;
+      background: #000000;
+      flex-shrink: 0;
+      z-index: 15;
+    }
+    .avatar-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: none;
+      padding: 0;
+      background: #fff3c4;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.15s ease;
+    }
+    .avatar-btn:active {
+      transform: scale(0.92);
+    }
+    .nav-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-pill {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--bg-pill);
+      color: var(--text-secondary);
+      transition: all 0.18s ease;
+    }
+    .nav-pill.active {
+      background: var(--accent-lavender);
+      color: #0d0d10;
+    }
+
+    /* Scrollable Main Area */
+    .main-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 4px 16px 104px 16px;
+      scrollbar-width: none;
+    }
+    .main-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Funded Wallet Hero */
+    .wallet-hero {
+      padding: 6px 2px 16px 2px;
+    }
+    .balance-amount {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -1.4px;
+      line-height: 1.08;
+      font-variant-numeric: tabular-nums;
+      margin: 0;
+    }
+    .balance-subrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .pnl-green {
+      color: var(--green);
+    }
+    .pnl-pill {
+      background: rgba(22, 199, 132, 0.14);
+      color: var(--green);
+      padding: 2px 8px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .sol-network-tag {
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Quick Actions Grid */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .qa-btn {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 12px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.14s ease, background 0.14s ease;
+    }
+    .qa-btn:active {
+      transform: scale(0.95);
+      background: #1f1f24;
+    }
+    .qa-icon {
+      color: var(--accent-lavender);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Solana Token Holding Card */
+    .sol-holding-card {
+      margin-top: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.14s ease;
+    }
+    .sol-holding-card:active {
+      background: #1b1b1f;
+      transform: scale(0.985);
+    }
+    .sol-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sol-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #111115;
+      border: 1px solid #282830;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .sol-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .sol-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    .sol-right {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .sol-usd {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .sol-delta {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      margin-top: 2px;
+    }
+
+    /* Welcome Card (Optional Pre-deposit Mode) */
+    .welcome-card {
+      background: var(--bg-card);
+      border-radius: 22px;
+      padding: 26px 20px 22px 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .welcome-card.hidden, .wallet-hero.hidden {
+      display: none;
+    }
+    .welcome-title {
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 12px 0 8px 0;
+      letter-spacing: -0.4px;
+    }
+    .welcome-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      max-width: 260px;
+      margin: 0 auto 20px auto;
+    }
+    .btn-lavender-full {
+      width: 100%;
+      background: var(--accent-lavender);
+      color: #0d0d10;
+      border: none;
+      border-radius: 16px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Explore Markets Section */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 18px 0 14px 2px;
+      letter-spacing: -0.3px;
+    }
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .filter-row::-webkit-scrollbar {
+      display: none;
+    }
+    .filter-pill {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--bg-pill);
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .filter-pill.active {
+      background: #ffffff;
+      color: #000000;
+    }
+    .filter-pill.heart {
+      padding: 8px 12px;
+      color: #ffffff;
+    }
+
+    /* Market Token Rows */
+    .token-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .token-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 4px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+    .token-row:active {
+      background: rgba(255,255,255,0.04);
+    }
+    .token-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .token-icon-wrap {
+      position: relative;
+      width: 42px;
+      height: 42px;
+    }
+    .token-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      overflow: hidden;
+    }
+    .rank-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 17px;
+      height: 17px;
+      border-radius: 5px;
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000000;
+      border: 1.5px solid #000000;
+    }
+    .rank-1 { background: #facc15; }
+    .rank-2 { background: #e5e7eb; }
+    .rank-3 { background: #f59e0b; }
+    .token-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .token-mcap {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .token-right {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .token-price {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .token-change {
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .up { color: var(--green); }
+    .down { color: var(--red); }
+
+    /* Bottom Floating Search Bar */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px calc(16px + var(--safe-bottom)) 16px;
+      background: linear-gradient(to top, #000000 72%, rgba(0,0,0,0));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 25;
+    }
+    .search-box {
+      flex: 1;
+      height: 48px;
+      background: rgba(32, 32, 36, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 10px;
+    }
+    .search-box input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      font-size: 15px;
+      width: 100%;
+    }
+    .search-box input::placeholder {
+      color: var(--text-secondary);
+    }
+    .fab-plus {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-lavender);
+      color: #0d0d10;
+      border: none;
+      font-size: 26px;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(171, 159, 242, 0.25);
+    }
+    .fab-plus:active {
+      transform: scale(0.92);
+    }
+
+    /* Modal Sheets */
+    .sheet-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 40;
+    }
+    .sheet-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 34px;
+      background: #000000;
+      border-top-left-radius: 26px;
+      border-top-right-radius: 26px;
+      border-top: 1px solid #242428;
+      transform: translateY(104%);
+      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-sheet.open {
+      transform: translateY(0);
+    }
+    .sheet-handle-area {
+      padding: 10px 0 6px 0;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .sheet-handle {
+      width: 38px;
+      height: 4px;
+      border-radius: 99px;
+      background: #48484a;
+    }
+
+    /* Profile Modal Specifics (@ONOCHA) */
+    .profile-top-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      padding: 2px 18px 8px 18px;
+    }
+    .btn-manage {
+      background: var(--bg-pill);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-share-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-pill);
+      color: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .profile-header-body {
+      padding: 4px 20px 18px 20px;
+      border-bottom: 1px solid #1c1c20;
+    }
+    .profile-avatar-lg {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #fff3c4;
+    }
+    .profile-username {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin: 0 0 8px 0;
+    }
+    .profile-stats {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+    .profile-stats strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .bio-link {
+      color: var(--blue-link);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .joined-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .profile-portfolio {
+      padding: 20px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .profile-bal-big {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      font-variant-numeric: tabular-nums;
+    }
+    .profile-bal-24h {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      margin-bottom: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+    .profile-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .empty-positions {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 44px;
+    }
+
+    /* Solana Detail Chart Sheet */
+    .chart-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 16px;
+      margin: 12px 0 18px 0;
+      border: 1px solid var(--border-subtle);
+    }
+    .tf-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+    .tf-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .tf-btn.active {
+      background: rgba(171, 159, 242, 0.16);
+      color: var(--accent-lavender);
+    }
+
+    /* Director / Scene Control Panel */
+    .director-sheet {
+      top: auto;
+      max-height: 85%;
+      background: #121215;
+      padding: 0 20px 28px 20px;
+      overflow-y: auto;
+    }
+    .director-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 6px 0 4px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .director-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .preset-btn {
+      width: 100%;
+      text-align: left;
+      background: #1c1c21;
+      border: 1px solid #2c2c34;
+      color: #ffffff;
+      padding: 12px 14px;
+      border-radius: 14px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .preset-btn.active-preset {
+      border-color: var(--accent-lavender);
+      background: rgba(171, 159, 242, 0.12);
+    }
+    .preset-btn small {
+      display: block;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .input-group {
+      margin-top: 12px;
+    }
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .input-group input {
+      width: 100%;
+      background: #1c1c21;
+      border: 1px solid #2c2c34;
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-top: 1px solid #222228;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    /* Simulated iOS Push Banner for Incoming SOL Shot */
+    .ios-notification {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      background: rgba(34, 34, 38, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 90;
+      transform: translateY(-140%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.65);
+    }
+    .ios-notification.show {
+      transform: translateY(0);
+    }
+  </style>
+  <link rel="manifest" href="manifest.json" />
+  <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script>
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    
+    <!-- Simulated iOS Notification Banner -->
+    <div class="ios-notification" id="iosNotif">
+      <div style="width:36px;height:36px;border-radius:10px;background:#181524;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+          <path d="M16 5C9.9 5 5 9.9 5 16v8.5c0 1.4 1.6 2.1 2.7 1.3l2.4-1.8c.8-.6 1.9-.6 2.7 0l1.9 1.4c.8.6 1.8.6 2.6 0l1.9-1.4c.8-.6 1.9-.6 2.7 0l2.4 1.8c1.1.8 2.7.1 2.7-1.3V16c0-6.1-4.9-11-11-11z" fill="#AB9FF2"/>
+          <circle cx="13" cy="15" r="1.7" fill="#121118"/>
+          <circle cx="19" cy="15" r="1.7" fill="#121118"/>
+        </svg>
+      </div>
+      <div style="flex:1;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:#a1a1aa;font-weight:600;">
+          <span>PHANTOM</span>
+          <span>ahora</span>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:#fff;margin-top:1px;">Solana recibido · +426.53 SOL</div>
+        <div style="font-size:13px;color:#16c784;font-weight:600;">+$63,978.97 USD añadidos a @ONOCHA</div>
+      </div>
+    </div>
+
+    <!-- Simulated iOS Status Bar -->
+    <div class="ios-status-bar" id="iosStatusBar">
+      <div class="status-time">
+        <span>6:21</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#ffffff">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </div>
+      <div class="status-icons">
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="#ffffff">
+          <rect x="0" y="7" width="2.6" height="4" rx="0.8"/>
+          <rect x="4.2" y="5" width="2.6" height="6" rx="0.8"/>
+          <rect x="8.4" y="2.5" width="2.6" height="8.5" rx="0.8"/>
+          <rect x="12.6" y="0" width="2.6" height="11" rx="0.8"/>
+        </svg>
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="#ffffff">
+          <path d="M8 9.6a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zm-3.6-2.2a5.2 5.2 0 0 1 7.2 0l1.2-1.3a7 7 0 0 0-9.6 0l1.2 1.3zm-2.8-2.9a9.2 9.2 0 0 1 12.8 0l1.2-1.3a11 11 0 0 0-15.2 0l1.2 1.3z"/>
+        </svg>
+        <div class="battery-pill">84</div>
+      </div>
+    </div>
+
+    <!-- Top Navigation -->
+    <div class="top-nav">
+      <button class="avatar-btn" id="openProfileBtn" aria-label="Perfil ONOCHA">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <rect width="100" height="100" fill="#FFF3C4"/>
+          <path d="M24 22 L26 28 L32 30 L26 32 L24 38 L22 32 L16 30 L22 28 Z" fill="#FCD34D"/>
+          <path d="M74 18 L75.5 22.5 L80 24 L75.5 25.5 L74 30 L72.5 25.5 L68 24 L72.5 22.5 Z" fill="#FCD34D"/>
+          <path d="M18 95 C18 62, 34 45, 56 46 C76 47, 86 64, 84 95 Z" fill="#FF6B3D"/>
+          <path d="M72 52 C80 44, 88 50, 82 62 Z" fill="#FF6B3D"/>
+          <rect x="44" y="58" width="18" height="13" rx="3" fill="#18181B"/>
+          <rect x="65" y="58" width="17" height="13" rx="3" fill="#18181B"/>
+          <rect x="61" y="61" width="5" height="3" fill="#18181B"/>
+          <line x1="47" y1="61" x2="51" y2="68" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
+          <line x1="68" y1="61" x2="72" y2="68" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="nav-pills">
+        <button class="nav-pill active" data-tab="inicio">Inicio</button>
+        <button class="nav-pill" data-tab="operar">Operar</button>
+        <button class="nav-pill" data-tab="predecir">Predecir</button>
+      </div>
+    </div>
+
+    <!-- Main Scrollable Content -->
+    <div class="main-scroll" id="mainScroll">
+      
+      <!-- FUNDED WALLET HERO ($63,978.97 in Solana) -->
+      <div class="wallet-hero" id="fundedHero">
+        <div class="balance-amount" id="mainUsdDisplay">$63,978.97</div>
+        <div class="balance-subrow">
+          <span class="pnl-green" id="mainPnlDisplay">+$2,418.50</span>
+          <span class="pnl-pill" id="mainPctDisplay">+3.93%</span>
+          <span class="sol-network-tag" id="mainSolSub">· 426.53 SOL</span>
+        </div>
+
+        <!-- 4 Quick Action Buttons -->
+        <div class="quick-actions">
+          <button class="qa-btn" onclick="openSceneDirector()">
+            <span class="qa-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M3 14h7v7H3z"/></svg>
+            </span>
+            <span>Recibir</span>
+          </button>
+          <button class="qa-btn" onclick="openSceneDirector()">
+            <span class="qa-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </span>
+            <span>Enviar</span>
+          </button>
+          <button class="qa-btn" onclick="openSceneDirector()">
+            <span class="qa-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            </span>
+            <span>Canjear</span>
+          </button>
+          <button class="qa-btn" onclick="openSceneDirector()">
+            <span class="qa-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </span>
+            <span>Depositar</span>
+          </button>
+        </div>
+
+        <!-- Solana Holding Card -->
+        <div class="sol-holding-card" id="openSolDetailBtn">
+          <div class="sol-left">
+            <div class="sol-badge">
+              <svg width="22" height="22" viewBox="0 0 397.7 311.7">
+                <defs>
+                  <linearGradient id="solGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#9945FF"/>
+                    <stop offset="50%" stop-color="#19FB9B"/>
+                    <stop offset="100%" stop-color="#00FFA3"/>
+                  </linearGradient>
+                </defs>
+                <path fill="url(#solGrad)" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zM64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8zm268.5 115.5c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="sol-title">Solana</div>
+              <div class="sol-sub" id="cardSolAmount">426.53 SOL</div>
+            </div>
+          </div>
+          <div class="sol-right">
+            <div class="sol-usd" id="cardSolUsd">$63,978.97</div>
+            <div class="sol-delta" id="cardSolPnl">+$2,418.50</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTIONAL WELCOME CARD (When toggled to $0.00 pre-deposit scene) -->
+      <div class="welcome-card hidden" id="welcomeCard">
+        <div style="display:flex;justify-content:center;">
+          <svg width="120" height="72" viewBox="0 0 160 95" fill="none">
+            <ellipse cx="80" cy="52" rx="54" ry="26" fill="#2A2438"/>
+            <path d="M58 55 C58 38, 70 28, 84 28 C98 28, 108 38, 108 55 L108 66 C105 63, 101 63, 98 66 C95 63, 91 63, 88 66 C85 63, 81 63, 78 66 C74 63, 68 63, 64 66 Z" fill="#FFFFFF"/>
+            <circle cx="84" cy="43" r="2.5" fill="#18181B"/>
+            <circle cx="94" cy="43" r="2.5" fill="#18181B"/>
+            <circle cx="62" cy="24" r="14" fill="#18181B" stroke="#3F3F46" stroke-width="2"/>
+            <path d="M56 21h12M56 24h12M56 27h12" stroke="#14F195" stroke-width="2" stroke-linecap="round"/>
+            <rect x="98" y="18" width="32" height="18" rx="9" fill="#FFFFFF"/>
+            <text x="114" y="30" text-anchor="middle" fill="#000" font-size="9" font-weight="800" font-family="sans-serif">Pay</text>
+          </svg>
+        </div>
+        <div class="welcome-title">Le damos la bienvenida a<br/>Phantom</div>
+        <div class="welcome-sub">Añada efectivo o cripto para empezar a operar</div>
+        <button class="btn-lavender-full" onclick="openSceneDirector()">Deposite</button>
+      </div>
+
+      <!-- Explora los mercados -->
+      <div class="section-header">
+        <span>Explora los mercados</span>
+        <span style="color:var(--text-secondary);font-weight:500;">›</span>
+      </div>
+
+      <div class="filter-row" id="marketFilters">
+        <button class="filter-pill heart" data-cat="fav">♥</button>
+        <button class="filter-pill active" data-cat="trending">Trending</button>
+        <button class="filter-pill" data-cat="majors">Majors</button>
+        <button class="filter-pill" data-cat="perps">Perps</button>
+        <button class="filter-pill" data-cat="global">Global</button>
+      </div>
+
+      <div class="token-list" id="tokenList"></div>
+    </div>
+
+    <!-- Bottom Fixed Search & '+' Button -->
+    <div class="bottom-bar">
+      <div class="search-box">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Buscar Phantom" autocomplete="off" />
+      </div>
+      <button class="fab-plus" id="openDirectorBtn" aria-label="Ajustes de escena">+</button>
+    </div>
+
+    <!-- Sheet Backdrop -->
+    <div class="sheet-backdrop" id="sheetBackdrop"></div>
+
+    <!-- SHEET 1: @ONOCHA PROFILE MODAL -->
+    <div class="modal-sheet" id="profileSheet">
+      <div class="sheet-handle-area" onclick="closeAllSheets()">
+        <div class="sheet-handle"></div>
+      </div>
+      <div class="profile-top-actions">
+        <button class="btn-manage" onclick="openSceneDirector()">Gestionar</button>
+        <button class="btn-share-circle" onclick="triggerIncomingSolAnim()" title="Simular notificación">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="profile-header-body">
+        <div class="profile-avatar-lg">
+          <svg viewBox="0 0 100 100" width="100%" height="100%">
+            <rect width="100" height="100" fill="#FFF3C4"/>
+            <path d="M24 22 L26 28 L32 30 L26 32 L24 38 L22 32 L16 30 L22 28 Z" fill="#FCD34D"/>
+            <path d="M74 18 L75.5 22.5 L80 24 L75.5 25.5 L74 30 L72.5 25.5 L68 24 L72.5 22.5 Z" fill="#FCD34D"/>
+            <path d="M18 95 C18 62, 34 45, 56 46 C76 47, 86 64, 84 95 Z" fill="#FF6B3D"/>
+            <path d="M72 52 C80 44, 88 50, 82 62 Z" fill="#FF6B3D"/>
+            <rect x="44" y="58" width="18" height="13" rx="3" fill="#18181B"/>
+            <rect x="65" y="58" width="17" height="13" rx="3" fill="#18181B"/>
+            <rect x="61" y="61" width="5" height="3" fill="#18181B"/>
+            <line x1="47" y1="61" x2="51" y2="68" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
+            <line x1="68" y1="61" x2="72" y2="68" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h1 class="profile-username" id="profileHandle">@ONOCHA</h1>
+        <div class="profile-stats">
+          <span><strong>0</strong> Seguidores</span>
+          <span><strong id="profileVolume">$63,978.97</strong> Volumen</span>
+        </div>
+        <div class="bio-link" id="bioText" onclick="editBio()">Añadir una biografía</div>
+        <div class="joined-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <span>Se unió Nov 2026</span>
+        </div>
+      </div>
+
+      <div class="profile-portfolio">
+        <div class="profile-bal-big" id="profileUsdBal">$63,978.97</div>
+        <div class="profile-bal-24h" id="profilePnl24h">+$2,418.50 24h</div>
+        <div class="profile-tabs">
+          <button class="filter-pill active" id="tabAbiertas" onclick="switchProfileTab('abiertas')">Abiertas</button>
+          <button class="filter-pill" id="tabCerradas" onclick="switchProfileTab('cerradas')">Cerradas</button>
+        </div>
+        <div id="profilePositionsContainer"></div>
+      </div>
+    </div>
+
+    <!-- SHEET 2: SOLANA DETAIL & INTERACTIVE CHART -->
+    <div class="modal-sheet" id="solDetailSheet">
+      <div class="sheet-handle-area" onclick="closeAllSheets()">
+        <div class="sheet-handle"></div>
+      </div>
+      <div style="padding:8px 20px 24px 20px;overflow-y:auto;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="sol-badge" style="width:36px;height:36px;">
+              <svg width="18" height="18" viewBox="0 0 397.7 311.7">
+                <path fill="url(#solGrad)" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zM64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8zm268.5 115.5c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-size:18px;font-weight:700;">Solana</div>
+              <div style="font-size:12px;color:var(--text-secondary);">SOL · $150.00 / SOL</div>
+            </div>
+          </div>
+          <button class="btn-manage" onclick="closeAllSheets()">Cerrar</button>
+        </div>
+
+        <div style="font-size:34px;font-weight:700;letter-spacing:-1px;font-variant-numeric:tabular-nums;" id="detailUsd">$63,978.97</div>
+        <div style="font-size:14px;font-weight:600;color:var(--green);margin-top:4px;" id="detailSub">+$2,418.50 (+3.93%) Hoy</div>
+
+        <div class="chart-card">
+          <svg id="solChartSvg" viewBox="0 0 340 130" width="100%" height="130">
+            <defs>
+              <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#16c784" stop-opacity="0.32"/>
+                <stop offset="100%" stop-color="#16c784" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <path id="chartAreaPath" fill="url(#chartFill)" d=""/>
+            <path id="chartLinePath" fill="none" stroke="#16c784" stroke-width="2.6" stroke-linecap="round" d=""/>
+          </svg>
+          <div class="tf-row">
+            <button class="tf-btn" onclick="updateChartTf('1H', this)">1H</button>
+            <button class="tf-btn active" onclick="updateChartTf('1D', this)">1D</button>
+            <button class="tf-btn" onclick="updateChartTf('1S', this)">1S</button>
+            <button class="tf-btn" onclick="updateChartTf('1M', this)">1M</button>
+            <button class="tf-btn" onclick="updateChartTf('TODO', this)">TODO</button>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-card);border-radius:16px;padding:14px 16px;border:1px solid var(--border-subtle);">
+          <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:14px;">
+            <span style="color:var(--text-secondary);">Tu saldo en SOL</span>
+            <strong id="detailSolAmt">426.53 SOL</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:14px;border-top:1px solid #222227;">
+            <span style="color:var(--text-secondary);">Valor en USD</span>
+            <strong id="detailUsdRow">$63,978.97</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:14px;border-top:1px solid #222227;">
+            <span style="color:var(--text-secondary);">Red</span>
+            <strong>Solana Mainnet</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHEET 3: DIRECTOR / SCENE SETTINGS -->
+    <div class="modal-sheet director-sheet" id="directorSheet">
+      <div class="sheet-handle-area" onclick="closeAllSheets()">
+        <div class="sheet-handle"></div>
+      </div>
+      <div class="director-title">
+        <span>🎬 Ajustes de Escena (Rodaje)</span>
+        <button class="btn-manage" onclick="closeAllSheets()">Listo</button>
+      </div>
+      <div class="director-sub">Controla los valores en pantalla entre toma y toma.</div>
+
+      <button class="preset-btn active-preset" id="preset1" onclick="applyPreset('usd63k')">
+        <strong>$63,978.97 USD en Solana (426.53 SOL)</strong>
+        <small>Balance fondeado en dólares equivalente en SOL</small>
+      </button>
+
+      <button class="preset-btn" id="preset2" onclick="applyPreset('sol63k')">
+        <strong>63,978.97 SOL ($9,596,845.50 USD)</strong>
+        <small>63,978.97 tokens de Solana en cartera</small>
+      </button>
+
+      <button class="preset-btn" id="preset3" onclick="applyPreset('zero')">
+        <strong>$0.00 (Antes del depósito)</strong>
+        <small>Muestra la pantalla inicial de bienvenida de Phantom</small>
+      </button>
+
+      <div class="input-group">
+        <label>Usuario (@Handle)</label>
+        <input type="text" id="inputHandle" value="@ONOCHA" oninput="syncCustomInputs()" />
+      </div>
+
+      <div class="input-group">
+        <label>Balance Principal (USD)</label>
+        <input type="text" id="inputUsd" value="$63,978.97" oninput="syncCustomInputs()" />
+      </div>
+
+      <div class="input-group">
+        <label>Cantidad de Solana (SOL)</label>
+        <input type="text" id="inputSol" value="426.53 SOL" oninput="syncCustomInputs()" />
+      </div>
+
+      <div class="toggle-row">
+        <span>Barra de estado iOS simulada (6:21)</span>
+        <input type="checkbox" id="toggleStatusBar" checked onchange="toggleIosBar()" style="width:20px;height:20px;accent-color:#ab9ff2;" />
+      </div>
+
+      <button class="btn-lavender-full" style="margin-top:12px;" onclick="closeAllSheets(); triggerIncomingSolAnim();">
+        Simular Notificación de Recepción SOL
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    const tokensData = [
+      {
+        name: "Max",
+        mcap: "Cap. merc. de $4.7M",
+        price: "$0.00466987",
+        change: "+94,249%",
+        up: true,
+        rank: 1,
+        cat: ["trending", "fav"],
+        bg: "#d6c7b2",
+        color: "#18181b",
+        label: "🐕"
+      },
+      {
+        name: "NVDAON",
+        mcap: "Cap. merc. de $14M",
+        price: "$158.27",
+        change: "-6.46%",
+        up: false,
+        rank: 2,
+        cat: ["trending", "majors"],
+        bg: "#76b900",
+        color: "#ffffff",
+        label: "NV"
+      },
+      {
+        name: "CARDS",
+        mcap: "Cap. merc. de $173M",
+        price: "$0.19",
+        change: "-13.30%",
+        up: false,
+        rank: 3,
+        cat: ["trending", "global"],
+        bg: "#2b213a",
+        color: "#f97316",
+        label: "❖"
+      },
+      {
+        name: "DacityCoin",
+        mcap: "Cap. merc. de $7.7M",
+        price: "$0.00796589",
+        change: "+200.6%",
+        up: true,
+        rank: null,
+        cat: ["trending", "perps"],
+        bg: "#3b2338",
+        color: "#f472b6",
+        label: "A"
+      },
+      {
+        name: "Solana",
+        mcap: "Cap. merc. de $71.4B",
+        price: "$150.00",
+        change: "+3.93%",
+        up: true,
+        rank: null,
+        cat: ["majors", "perps", "global", "fav"],
+        bg: "#131318",
+        color: "#14f195",
+        label: "◎"
+      }
+    ];
+
+    let state = {
+      mode: "usd63k",
+      handle: "@ONOCHA",
+      usd: "$63,978.97",
+      sol: "426.53 SOL",
+      pnl: "+$2,418.50",
+      pct: "+3.93%",
+      profileTab: "abiertas",
+      currentCat: "trending",
+      search: ""
+    };
+
+    function renderTokens() {
+      const list = document.getElementById("tokenList");
+      const filtered = tokensData.filter(t => {
+        const matchCat = t.cat.includes(state.currentCat);
+        const matchSearch = t.name.toLowerCase().includes(state.search.toLowerCase());
+        return state.search ? matchSearch : matchCat;
+      });
+
+      list.innerHTML = filtered.map(t => `
+        <div class="token-row" onclick="${t.name === 'Solana' ? 'openSolDetail()' : ''}">
+          <div class="token-left">
+            <div class="token-icon-wrap">
+              <div class="token-avatar" style="background:${t.bg};color:${t.color};">${t.label}</div>
+              ${t.rank ? `<div class="rank-badge rank-${t.rank}">${t.rank}</div>` : ""}
+            </div>
+            <div>
+              <div class="token-name">${t.name}</div>
+              <div class="token-mcap">${t.mcap}</div>
+            </div>
+          </div>
+          <div class="token-right">
+            <div class="token-price">${t.price}</div>
+            <div class="token-change ${t.up ? 'up' : 'down'}">${t.change}</div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function updateUI() {
+      const isZero = state.mode === "zero";
+      document.getElementById("fundedHero").classList.toggle("hidden", isZero);
+      document.getElementById("welcomeCard").classList.toggle("hidden", !isZero);
+
+      document.getElementById("mainUsdDisplay").textContent = state.usd;
+      document.getElementById("mainPnlDisplay").textContent = state.pnl;
+      document.getElementById("mainPctDisplay").textContent = state.pct;
+      document.getElementById("mainSolSub").textContent = "· " + state.sol;
+
+      document.getElementById("cardSolAmount").textContent = state.sol;
+      document.getElementById("cardSolUsd").textContent = state.usd;
+      document.getElementById("cardSolPnl").textContent = state.pnl;
+
+      document.getElementById("profileHandle").textContent = state.handle;
+      document.getElementById("profileVolume").textContent = state.usd;
+      document.getElementById("profileUsdBal").textContent = state.usd;
+      document.getElementById("profilePnl24h").textContent = `${state.pnl} 24h`;
+      document.getElementById("profilePnl24h").style.color = isZero ? "#8e8e93" : "#16c784";
+
+      document.getElementById("detailUsd").textContent = state.usd;
+      document.getElementById("detailSub").textContent = `${state.pnl} (${state.pct}) Hoy`;
+      document.getElementById("detailSolAmt").textContent = state.sol;
+      document.getElementById("detailUsdRow").textContent = state.usd;
+
+      renderProfilePositions();
+    }
+
+    function renderProfilePositions() {
+      const container = document.getElementById("profilePositionsContainer");
+      if (state.mode === "zero" || state.profileTab === "cerradas") {
+        container.innerHTML = `<div class="empty-positions">No hay posiciones ${state.profileTab}</div>`;
+        return;
+      }
+      container.innerHTML = `
+        <div class="sol-holding-card" style="margin-top:0;" onclick="closeAllSheets(); setTimeout(openSolDetail, 180);">
+          <div class="sol-left">
+            <div class="sol-badge">
+              <span style="color:#14f195;font-weight:800;font-size:18px;">◎</span>
+            </div>
+            <div>
+              <div class="sol-title">Solana</div>
+              <div class="sol-sub">${state.sol}</div>
+            </div>
+          </div>
+          <div class="sol-right">
+            <div class="sol-usd">${state.usd}</div>
+            <div class="sol-delta">${state.pnl}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function switchProfileTab(tab) {
+      state.profileTab = tab;
+      document.getElementById("tabAbiertas").classList.toggle("active", tab === "abiertas");
+      document.getElementById("tabCerradas").classList.toggle("active", tab === "cerradas");
+      renderProfilePositions();
+    }
+
+    function openSheet(id) {
+      closeAllSheets();
+      document.getElementById("sheetBackdrop").classList.add("open");
+      document.getElementById(id).classList.add("open");
+    }
+
+    function closeAllSheets() {
+      document.getElementById("sheetBackdrop").classList.remove("open");
+      document.querySelectorAll(".modal-sheet").forEach(s => s.classList.remove("open"));
+    }
+
+    function openSolDetail() {
+      openSheet("solDetailSheet");
+      drawChart("1D");
+    }
+
+    function openSceneDirector() {
+      openSheet("directorSheet");
+    }
+
+    function applyPreset(preset) {
+      state.mode = preset;
+      document.querySelectorAll(".preset-btn").forEach(b => b.classList.remove("active-preset"));
+      if (preset === "usd63k") {
+        document.getElementById("preset1").classList.add("active-preset");
+        state.usd = "$63,978.97";
+        state.sol = "426.53 SOL";
+        state.pnl = "+$2,418.50";
+        state.pct = "+3.93%";
+      } else if (preset === "sol63k") {
+        document.getElementById("preset2").classList.add("active-preset");
+        state.usd = "$9,596,845.50";
+        state.sol = "63,978.97 SOL";
+        state.pnl = "+$362,760.75";
+        state.pct = "+3.93%";
+      } else {
+        document.getElementById("preset3").classList.add("active-preset");
+        state.usd = "$0.00";
+        state.sol = "0.00 SOL";
+        state.pnl = "+$0.00";
+        state.pct = "0.00%";
+      }
+      document.getElementById("inputUsd").value = state.usd;
+      document.getElementById("inputSol").value = state.sol;
+      updateUI();
+    }
+
+    function syncCustomInputs() {
+      state.handle = document.getElementById("inputHandle").value || "@ONOCHA";
+      state.usd = document.getElementById("inputUsd").value || "$0.00";
+      state.sol = document.getElementById("inputSol").value || "0.00 SOL";
+      updateUI();
+    }
+
+    function toggleIosBar() {
+      const show = document.getElementById("toggleStatusBar").checked;
+      document.getElementById("iosStatusBar").classList.toggle("hidden", !show);
+    }
+
+    function editBio() {
+      const el = document.getElementById("bioText");
+      const current = el.textContent === "Añadir una biografía" ? "" : el.textContent;
+      const next = prompt("Biografía para la escena:", current);
+      if (next !== null) {
+        el.textContent = next.trim() || "Añadir una biografía";
+        el.style.color = next.trim() ? "#d4d4d8" : "#6c8eef";
+      }
+    }
+
+    function triggerIncomingSolAnim() {
+      const banner = document.getElementById("iosNotif");
+      banner.classList.add("show");
+      setTimeout(() => banner.classList.remove("show"), 4200);
+    }
+
+    const chartSeries = {
+      "1H": [92, 88, 90, 84, 79, 82, 74, 70, 66, 62, 55, 50],
+      "1D": [108, 102, 105, 94, 98, 86, 80, 84, 68, 60, 52, 42],
+      "1S": [115, 110, 96, 102, 88, 76, 82, 70, 64, 58, 48, 38],
+      "1M": [118, 112, 114, 99, 92, 95, 78, 72, 65, 54, 46, 34],
+      "TODO": [122, 118, 112, 105, 96, 88, 76, 68, 56, 48, 38, 28]
+    };
+
+    function drawChart(tf) {
+      const pts = chartSeries[tf] || chartSeries["1D"];
+      const step = 340 / (pts.length - 1);
+      let d = `M 0 ${pts[0]}`;
+      pts.forEach((y, i) => {
+        if (i > 0) d += ` L ${(i * step).toFixed(1)} ${y}`;
+      });
+      document.getElementById("chartLinePath").setAttribute("d", d);
+      document.getElementById("chartAreaPath").setAttribute("d", `${d} L 340 130 L 0 130 Z`);
+    }
+
+    function updateChartTf(tf, btn) {
+      document.querySelectorAll(".tf-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      drawChart(tf);
+    }
+
+    // Event listeners
+    document.getElementById("openProfileBtn").addEventListener("click", () => openSheet("profileSheet"));
+    document.getElementById("openDirectorBtn").addEventListener("click", openSceneDirector);
+    document.getElementById("openSolDetailBtn").addEventListener("click", openSolDetail);
+    document.getElementById("sheetBackdrop").addEventListener("click", closeAllSheets);
+
+    document.querySelectorAll("#marketFilters .filter-pill").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#marketFilters .filter-pill").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        state.currentCat = btn.dataset.cat;
+        renderTokens();
+      });
+    });
+
+    document.querySelectorAll(".nav-pill").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".nav-pill").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      state.search = e.target.value;
+      renderTokens();
+    });
+
+    renderTokens();
+    updateUI();
+  </script>
+</body>
+</html>

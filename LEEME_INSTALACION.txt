@@ -1,0 +1,17 @@
+INSTRUCCIONES PARA INSTALAR COMO APP EN IPHONE / ANDROID (SIN BARRAS DE NAVEGADOR)
+
+OPCIÓN 1 — USO INMEDIATO SIN INTERNET (Archivo único):
+1. Descarga "Phantom-ONOCHA-App.html" en tu celular.
+2. Ábrelo desde la app "Archivos" (iPhone) o Chrome (Android).
+3. Funciona 100% offline con todos los gráficos, transiciones y el saldo de $63,978.97 en Solana.
+
+OPCIÓN 2 — INSTALAR EN LA PANTALLA DE INICIO CON ÍCONO DE PHANTOM (PWA Nativa):
+1. Sube la carpeta descomprimida de "Phantom-ONOCHA-PWA-Kit.zip" gratis arrastrándola a https://app.netlify.com/drop (toma 10 segundos, no requiere programar).
+2. Abre el enlace generado en Safari (iPhone) o Chrome (Android).
+3. En iPhone: toca el botón "Compartir" (cuadro con flecha hacia arriba) -> "Agregar a pantalla de inicio" -> "Agregar".
+4. En Android: toca los 3 puntos -> "Instalar aplicación".
+5. ¡Listo! Aparecerá el ícono de Phantom en tu celular y al abrirlo arrancará a pantalla completa sin barras de Safari/Chrome.
+
+TIP DE RODAJE:
+- Toca el botón "+" abajo a la derecha o "Gestionar" dentro de @ONOCHA para abrir los Ajustes de Escena.
+- Si la instalas en la pantalla de inicio de un iPhone real, desactiva la opción "Barra de estado iOS simulada (6:21)" para usar la barra real del teléfono.
